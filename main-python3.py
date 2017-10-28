@@ -25,21 +25,19 @@ while True:
     # larger scale factor means smaller photo sample and faster face tracking/detection
     # faces returned as a list of rectangles
 
-    print(faces) # delete later
-
     for (x, y, w, h) in faces:
         # draw rectangle around each detected face
         cv2.rectangle(frame, (x,y), (x+w, y+h), (0, 255, 0), 2)
         # create a crop of just the face
         cropped = frame[y:y+h, x:x+w]
 
-    # frame and cropped are numpy.ndarray's
     try:
         # try to display the cropped photo
         cv2.imshow('cropped', cropped)
 
-        # save the cropped image, will be sent off to microsoft face api
+        # save
         cv2.imwrite('face.png', cropped)
+        # from here, call functions to send to face api and parse incoming data
     except:
         # if error, just show the whole frame
         cv2.imshow('frame', frame)
